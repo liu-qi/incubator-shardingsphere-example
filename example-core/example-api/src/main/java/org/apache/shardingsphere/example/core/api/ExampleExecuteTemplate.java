@@ -30,5 +30,6 @@ public final class ExampleExecuteTemplate {
         } finally {
             exampleService.cleanEnvironment();
         }
+//        exampleService.tempTest();
     }
 }

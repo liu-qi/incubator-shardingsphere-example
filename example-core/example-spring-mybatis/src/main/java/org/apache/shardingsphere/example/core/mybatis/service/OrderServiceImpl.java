@@ -17,6 +17,7 @@
 
 package org.apache.shardingsphere.example.core.mybatis.service;
 
+import com.google.common.collect.Lists;
 import org.apache.shardingsphere.example.core.api.entity.Address;
 import org.apache.shardingsphere.example.core.api.entity.Order;
 import org.apache.shardingsphere.example.core.api.entity.OrderItem;
@@ -24,6 +25,7 @@ import org.apache.shardingsphere.example.core.api.repository.AddressRepository;
 import org.apache.shardingsphere.example.core.api.repository.OrderItemRepository;
 import org.apache.shardingsphere.example.core.api.repository.OrderRepository;
 import org.apache.shardingsphere.example.core.api.service.ExampleService;
+import org.apache.shardingsphere.example.core.mybatis.repository.MybatisOrderRepository;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -45,6 +47,9 @@ public class OrderServiceImpl implements ExampleService {
     
     @Resource
     private AddressRepository addressRepository;
+
+    @Resource
+    private MybatisOrderRepository mybatisOrderRepository;
 
     @Override
     public void initEnvironment() throws SQLException {
@@ -68,8 +73,8 @@ public class OrderServiceImpl implements ExampleService {
 
     @Override
     public void cleanEnvironment() throws SQLException {
-        orderRepository.dropTable();
-        orderItemRepository.dropTable();
+//        orderRepository.dropTable();
+//        orderItemRepository.dropTable();
     }
     
     @Override
@@ -78,7 +83,7 @@ public class OrderServiceImpl implements ExampleService {
         System.out.println("-------------- Process Success Begin ---------------");
         List<Long> orderIds = insertData();
         printData();
-        deleteData(orderIds);
+//        deleteData(orderIds);
         printData();
         System.out.println("-------------- Process Success Finish --------------");
     }
@@ -130,4 +135,18 @@ public class OrderServiceImpl implements ExampleService {
             System.out.println(each);
         }
     }
+
+    @Override
+    public void tempTest() throws SQLException {
+        getOrderByIds();
+    }
+
+    private void getOrderByIds() throws SQLException {
+        List<Order> orders = mybatisOrderRepository.getOrderByUserIds(
+                Lists.newArrayList(2L, 3L));
+        for (Order order : orders) {
+            System.out.println(order);
+        }
+    }
+
 }

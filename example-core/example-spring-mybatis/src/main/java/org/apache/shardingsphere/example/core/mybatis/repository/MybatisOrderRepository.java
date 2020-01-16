@@ -17,9 +17,16 @@
 
 package org.apache.shardingsphere.example.core.mybatis.repository;
 
-import org.apache.shardingsphere.example.core.api.repository.OrderRepository;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.shardingsphere.example.core.api.entity.Order;
+import org.apache.shardingsphere.example.core.api.repository.OrderRepository;
+
+import java.util.List;
 
 @Mapper
 public interface MybatisOrderRepository extends OrderRepository {
+
+    List<Order> getOrderByUserIds(@Param("userIds") List<Long> userIds);
+
 }

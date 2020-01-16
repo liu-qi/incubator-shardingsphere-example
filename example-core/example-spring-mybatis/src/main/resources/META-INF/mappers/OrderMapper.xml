@@ -35,4 +35,13 @@
     <select id="selectRange" resultMap="baseResultMap">
         SELECT * FROM t_order WHERE order_id BETWEEN 200000000000000000 AND 400000000000000000
     </select>
+
+    <select id="getOrderByUserIds" resultMap="baseResultMap">
+        SELECT od.* FROM t_order od LEFT JOIN t_order_item odi ON od.order_id = odi.order_id
+        WHERE od.user_id IN
+        <foreach collection="userIds" item="userId" index="index" open="(" close=")" separator=",">
+            #{userId}
+        </foreach>
+    </select>
+
 </mapper>

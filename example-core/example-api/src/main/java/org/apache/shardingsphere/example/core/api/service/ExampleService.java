@@ -55,4 +55,10 @@ public interface ExampleService {
      * @throws SQLException SQL exception
      */
     void printData() throws SQLException;
+
+    /**
+     * Temp test
+     * @throws SQLException SQL exception
+     */
+    void tempTest() throws SQLException;
 }

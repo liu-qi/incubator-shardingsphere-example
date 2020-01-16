@@ -153,4 +153,9 @@ public final class OrderServiceImpl implements ExampleService {
             System.out.println(each);
         }
     }
+
+    @Override
+    public void tempTest() throws SQLException {
+
+    }
 }
